@@ -12,14 +12,9 @@
    }
    ──────────────────────────────────────────────────────────── */
 const PHOTOS = [
-  { src: "images/placeholder-1.jpg", alt: "Portrait session", span: "tall" },
-  { src: "images/placeholder-2.jpg", alt: "Cinematic portrait" },
-  { src: "images/placeholder-3.jpg", alt: "Editorial shoot" },
-  { src: "images/placeholder-4.jpg", alt: "Brand content", span: "wide" },
-  { src: "images/placeholder-5.jpg", alt: "Studio portrait", span: "tall" },
-  { src: "images/placeholder-6.jpg", alt: "Outdoor portrait" },
-  { src: "images/placeholder-7.jpg", alt: "Event coverage" },
-  { src: "images/placeholder-8.jpg", alt: "Creative direction" },
+  { src: "images/DSC06942.jpg", alt: "Portrait", span: "tall" },
+  { src: "images/DSC06954.jpg", alt: "Portrait", span: "tall" },
+  { src: "images/DSC07046.jpg", alt: "Portrait", span: "tall" },
 ];
 
 /* ── VIDEOS ──────────────────────────────────────────────────
