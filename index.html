@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="sixtrsh — Cameron Reid. LA-based photographer and visual director. Cinematic portraits, events, brand content." />
+  <meta name="description" content="sixtrsh — Cameron Reid. LA-based photographer and visual director. Portraits, events, brand content." />
   <title>sixtrsh — Cameron Reid</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,9 +12,23 @@
 </head>
 <body>
 
-  <!-- Custom cursor (desktop only) -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursor-follower"></div>
+  <!-- Custom crosshair cursor (desktop only) -->
+  <div class="cursor-crosshair" id="cursor" aria-hidden="true">
+    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Circle -->
+      <circle class="ch-circle" cx="22" cy="22" r="7" stroke="currentColor" stroke-width="0.8"/>
+      <!-- Top arm -->
+      <line class="ch-arm ch-top"    x1="22" y1="2"  x2="22" y2="13" stroke="currentColor" stroke-width="0.8"/>
+      <!-- Bottom arm -->
+      <line class="ch-arm ch-bottom" x1="22" y1="31" x2="22" y2="42" stroke="currentColor" stroke-width="0.8"/>
+      <!-- Left arm -->
+      <line class="ch-arm ch-left"   x1="2"  y1="22" x2="13" y2="22" stroke="currentColor" stroke-width="0.8"/>
+      <!-- Right arm -->
+      <line class="ch-arm ch-right"  x1="31" y1="22" x2="42" y2="22" stroke="currentColor" stroke-width="0.8"/>
+      <!-- Centre dot -->
+      <circle class="ch-dot" cx="22" cy="22" r="1" fill="currentColor"/>
+    </svg>
+  </div>
 
   <!-- ─── NAV ─── -->
   <nav class="nav" id="nav">

@@ -20,44 +20,27 @@
   });
 })();
 
-/* ── Custom Cursor ─────────────────────────────────────────── */
+/* ── Custom Crosshair Cursor ────────────────────────────────── */
 const cursor = document.getElementById("cursor");
-const follower = document.getElementById("cursor-follower");
 
-if (window.matchMedia("(pointer: fine)").matches) {
-  let mx = 0, my = 0, fx = 0, fy = 0;
-
+if (window.matchMedia("(pointer: fine)").matches && cursor) {
+  // Instant position — no lag on the crosshair itself
   document.addEventListener("mousemove", (e) => {
-    mx = e.clientX;
-    my = e.clientY;
-    cursor.style.transform = `translate(${mx}px, ${my}px)`;
-  });
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  }, { passive: true });
 
-  // Smooth follower via RAF
-  (function animateFollower() {
-    fx += (mx - fx) * 0.12;
-    fy += (my - fy) * 0.12;
-    follower.style.transform = `translate(${fx}px, ${fy}px)`;
-    requestAnimationFrame(animateFollower);
-  })();
-
-  // Grow cursor on interactive elements
-  const interactables = "a, button, .portfolio-item, .product-card, .video-card, .toggle-btn, input, textarea";
+  // Focus state on interactive elements
+  const interactables = "a, button, .photo-item, .product-card, .video-card, input, textarea";
   document.addEventListener("mouseover", (e) => {
-    if (e.target.closest(interactables)) {
-      cursor.classList.add("cursor-hover");
-      follower.classList.add("cursor-hover");
-    }
+    if (e.target.closest(interactables)) cursor.classList.add("is-hover");
   });
   document.addEventListener("mouseout", (e) => {
-    if (e.target.closest(interactables)) {
-      cursor.classList.remove("cursor-hover");
-      follower.classList.remove("cursor-hover");
-    }
+    if (e.target.closest(interactables)) cursor.classList.remove("is-hover");
   });
 
-  document.addEventListener("mousedown", () => cursor.classList.add("cursor-click"));
-  document.addEventListener("mouseup", () => cursor.classList.remove("cursor-click"));
+  // Click pulse — rotate 45° and scale down, then snap back
+  document.addEventListener("mousedown", () => cursor.classList.add("is-click"));
+  document.addEventListener("mouseup",   () => cursor.classList.remove("is-click"));
 }
 
 /* ── Nav: scroll state + mobile menu ───────────────────────── */
