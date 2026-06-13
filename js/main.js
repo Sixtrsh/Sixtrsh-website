@@ -20,11 +20,11 @@
   });
 })();
 
-/* ── Custom Crosshair Cursor ────────────────────────────────── */
+/* ── Custom Skull Cursor ─────────────────────────────────────── */
 const cursor = document.getElementById("cursor");
 
 if (window.matchMedia("(pointer: fine)").matches && cursor) {
-  // Instant position — no lag on the crosshair itself
+  // Instant position — skulls don't lag
   document.addEventListener("mousemove", (e) => {
     cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
   }, { passive: true });
