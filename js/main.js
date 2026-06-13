@@ -2,6 +2,24 @@
    MAIN JS — sixtrsh.com
    ============================================================ */
 
+/* ── Theme Toggle ───────────────────────────────────────────── */
+(function () {
+  const html = document.documentElement;
+  const btn  = document.getElementById("theme-toggle");
+
+  // Load saved preference, fall back to system preference
+  const saved  = localStorage.getItem("sixtrsh-theme");
+  const system = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  const initial = saved || system;
+  html.setAttribute("data-theme", initial);
+
+  btn.addEventListener("click", () => {
+    const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    html.setAttribute("data-theme", next);
+    localStorage.setItem("sixtrsh-theme", next);
+  });
+})();
+
 /* ── Custom Cursor ─────────────────────────────────────────── */
 const cursor = document.getElementById("cursor");
 const follower = document.getElementById("cursor-follower");

@@ -6,24 +6,51 @@
 /* ── Reset & Base ─────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
+/* ── Dark mode (default) ─────────────────────────────────── */
+:root,
+[data-theme="dark"] {
   --bg:          #0a0a0a;
   --bg-2:        #111111;
   --bg-3:        #161616;
   --text:        #f0ede8;
   --text-muted:  #6a6a6a;
   --text-dim:    #3a3a3a;
-  --accent:      #f0ede8;
   --border:      #1e1e1e;
   --border-mid:  #2a2a2a;
+  --nav-bg:      rgba(10, 10, 10, 0.92);
+  --nav-mob-bg:  rgba(10, 10, 10, 0.97);
+  --placeholder: #161616;
+}
+
+/* ── Light mode ──────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg:          #f2ede6;
+  --bg-2:        #ebe5dd;
+  --bg-3:        #e3ddd5;
+  --text:        #18140f;
+  --text-muted:  #8a8278;
+  --text-dim:    #bab4ac;
+  --border:      #d8d2c9;
+  --border-mid:  #c8c2b8;
+  --nav-bg:      rgba(242, 237, 230, 0.92);
+  --nav-mob-bg:  rgba(242, 237, 230, 0.98);
+  --placeholder: #e3ddd5;
+}
+
+:root {
   --nav-h:       68px;
   --radius:      4px;
   --max-w:       1200px;
   --ease:        cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-out:    cubic-bezier(0.0, 0.0, 0.2, 1);
-  /* Gothic serif for display headings */
   --serif:       'Cormorant Garamond', Georgia, serif;
 }
+
+/* Smooth theme transition on everything except images */
+*, *::before, *::after {
+  transition: background-color 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
+}
+img { transition: none !important; }
 
 html {
   scroll-behavior: smooth;
@@ -172,12 +199,12 @@ input, textarea { cursor: none; }
 
 /* ── Image placeholder (until real images added) ─────────── */
 .img-placeholder {
-  background: var(--bg-3);
+  background: var(--placeholder);
   border: 1px solid var(--border);
 }
 
 .img-error {
-  background: var(--bg-3) !important;
+  background: var(--placeholder) !important;
   border: 1px solid var(--border) !important;
 }
 
@@ -196,7 +223,7 @@ input, textarea { cursor: none; }
 }
 
 .nav.scrolled {
-  background: rgba(10, 10, 10, 0.92);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-color: var(--border);
@@ -874,6 +901,39 @@ input, textarea { cursor: none; }
   to   { opacity: 1; transform: none; }
 }
 
+/* ── Theme Toggle ────────────────────────────────────────── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-mid);
+  color: var(--text-muted);
+  background: transparent;
+  transition: border-color 0.2s, color 0.2s, background 0.2s !important;
+  cursor: none;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+/* Show moon in dark mode, sun in light mode */
+[data-theme="dark"]  .icon-sun  { display: none; }
+[data-theme="dark"]  .icon-moon { display: block; }
+[data-theme="light"] .icon-moon { display: none; }
+[data-theme="light"] .icon-sun  { display: block; }
+
 /* ── Gothic: Hero Crosshair Watermark ───────────────────── */
 .hero-mark {
   position: absolute;
@@ -968,7 +1028,7 @@ input, textarea { cursor: none; }
   .nav-links {
     position: fixed;
     top: var(--nav-h); left: 0; right: 0;
-    background: rgba(10, 10, 10, 0.97);
+    background: var(--nav-mob-bg);
     backdrop-filter: blur(16px);
     flex-direction: column;
     align-items: flex-start;
