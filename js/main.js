@@ -85,7 +85,9 @@ sections.forEach((s) => sectionObserver.observe(s));
 /* ── Build Photo Grid ───────────────────────────────────────── */
 function buildPhotoGrid() {
   const grid = document.getElementById("photo-grid");
-  PHOTOS.forEach((photo) => {
+  const dots = document.getElementById("photo-carousel-dots");
+
+  PHOTOS.forEach((photo, index) => {
     const item = document.createElement("div");
     item.className = "photo-item" + (photo.span ? ` span-${photo.span}` : "");
     item.innerHTML = `
@@ -102,7 +104,110 @@ function buildPhotoGrid() {
         </div>
       </div>`;
     grid.appendChild(item);
+
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "photo-carousel-dot" + (index === 0 ? " active" : "");
+    dot.setAttribute("role", "tab");
+    dot.setAttribute("aria-label", `Photo ${index + 1} of ${PHOTOS.length}`);
+    dot.setAttribute("aria-selected", index === 0 ? "true" : "false");
+    dot.dataset.index = index;
+    dots.appendChild(dot);
   });
+}
+
+/* ── Photo Carousel (mobile) ────────────────────────────────── */
+function initPhotoCarousel() {
+  const mq = window.matchMedia("(max-width: 768px)");
+  const gallery = document.getElementById("photo-gallery");
+  const viewport = gallery.querySelector(".photo-carousel-viewport");
+  const track = document.getElementById("photo-grid");
+  const dotEls = gallery.querySelectorAll(".photo-carousel-dot");
+  const slides = track.querySelectorAll(".photo-item");
+
+  if (!slides.length) return;
+
+  let current = 0;
+  let startX = 0;
+  let dragX = 0;
+  let isDragging = false;
+  let slideWidth = 0;
+
+  function measure() {
+    slideWidth = viewport.offsetWidth;
+  }
+
+  function goTo(index, animate = true) {
+    current = Math.max(0, Math.min(index, slides.length - 1));
+    track.classList.toggle("is-dragging", !animate);
+    track.style.transform = `translate3d(${-current * slideWidth}px, 0, 0)`;
+
+    dotEls.forEach((dot, i) => {
+      const active = i === current;
+      dot.classList.toggle("active", active);
+      dot.setAttribute("aria-selected", active ? "true" : "false");
+    });
+  }
+
+  function onTouchStart(e) {
+    if (!mq.matches) return;
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    dragX = 0;
+    measure();
+    track.classList.add("is-dragging");
+  }
+
+  function onTouchMove(e) {
+    if (!isDragging) return;
+    dragX = e.touches[0].clientX - startX;
+    track.style.transform = `translate3d(${-current * slideWidth + dragX}px, 0, 0)`;
+  }
+
+  function onTouchEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    const threshold = slideWidth * 0.18;
+
+    if (dragX < -threshold) goTo(current + 1);
+    else if (dragX > threshold) goTo(current - 1);
+    else goTo(current);
+  }
+
+  function onResize() {
+    measure();
+    if (mq.matches) goTo(current, false);
+    else {
+      track.classList.remove("is-dragging");
+      track.style.transform = "";
+    }
+  }
+
+  dotEls.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      if (!mq.matches) return;
+      goTo(Number(dot.dataset.index));
+    });
+  });
+
+  viewport.addEventListener("touchstart", onTouchStart, { passive: true });
+  viewport.addEventListener("touchmove", onTouchMove, { passive: true });
+  viewport.addEventListener("touchend", onTouchEnd);
+  viewport.addEventListener("touchcancel", onTouchEnd);
+
+  mq.addEventListener("change", onResize);
+  window.addEventListener("resize", onResize);
+
+  if (slides.length <= 1) {
+    gallery.querySelector(".photo-carousel-dots").hidden = true;
+  }
+
+  measure();
+  if (mq.matches) goTo(0, false);
+  else {
+    track.classList.remove("is-dragging");
+    track.style.transform = "";
+  }
 }
 
 /* ── Build Video Grid ───────────────────────────────────────── */
@@ -245,6 +350,7 @@ buildPhotoGrid();
 buildVideoGrid();
 buildProductGrid();
 initImageFade();
+initPhotoCarousel();
 
 // Observe reveal elements after DOM is built
-observeReveal(".photo-item, .video-card, .product-card, .service-row, .about-container, .contact-left, .contact-form");
+observeReveal(".photo-gallery, .photo-item, .video-card, .product-card, .service-row, .about-container, .contact-left, .contact-form");
