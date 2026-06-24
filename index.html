@@ -7,7 +7,7 @@
   <title>sixtrsh — Cameron Reid</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -144,74 +144,27 @@
     <div class="container">
       <p class="section-eyebrow">Services</p>
       <h2 class="section-title">What I Offer</h2>
-      <div class="services-list">
-        <div class="service-row">
-          <div class="service-info">
-            <span class="service-num">01</span>
-            <h3 class="service-name">Portrait Session — 1 hr, 1 look</h3>
-          </div>
-          <span class="service-rate">$250</span>
+      <div class="capabilities-grid">
+        <div class="capability-card">
+          <h3 class="capability-name">Portraits</h3>
+          <p class="capability-desc">Individual and editorial portrait sessions. Studio or location. One look to full-day creative direction.</p>
         </div>
-        <div class="service-row">
-          <div class="service-info">
-            <span class="service-num">02</span>
-            <h3 class="service-name">Portrait Session — 2 hrs, 2 looks</h3>
-          </div>
-          <span class="service-rate">$400</span>
+        <div class="capability-card">
+          <h3 class="capability-name">Events</h3>
+          <p class="capability-desc">Coverage that feels cinematic, not journalistic. Concerts, launches, private events, and everything in between.</p>
         </div>
-        <div class="service-row">
-          <div class="service-info">
-            <span class="service-num">03</span>
-            <h3 class="service-name">Portrait Session — 4 hrs, extended</h3>
-          </div>
-          <span class="service-rate">$650</span>
+        <div class="capability-card">
+          <h3 class="capability-name">Brand Content</h3>
+          <p class="capability-desc">Visual identity, product shoots, and campaign imagery for founders, labels, and creative businesses.</p>
         </div>
-        <div class="service-row">
-          <div class="service-info">
-            <span class="service-num">04</span>
-            <h3 class="service-name">Event Coverage — up to 3 hrs</h3>
-          </div>
-          <span class="service-rate">$400</span>
-        </div>
-        <div class="service-row">
-          <div class="service-info">
-            <span class="service-num">05</span>
-            <h3 class="service-name">Event Coverage — up to 5 hrs</h3>
-          </div>
-          <span class="service-rate">$650</span>
-        </div>
-        <div class="service-row">
-          <div class="service-info">
-            <span class="service-num">06</span>
-            <h3 class="service-name">Event Coverage — full day</h3>
-          </div>
-          <span class="service-rate">$1,000</span>
-        </div>
-        <div class="service-row">
-          <div class="service-info">
-            <span class="service-num">07</span>
-            <h3 class="service-name">Brand Content / Commercial</h3>
-          </div>
-          <span class="service-rate">Quoted per project</span>
-        </div>
-        <div class="service-row service-addon">
-          <div class="service-info">
-            <span class="service-num">+</span>
-            <h3 class="service-name">Add Video / Reels</h3>
-          </div>
-          <span class="service-rate">+$150</span>
-        </div>
-        <div class="service-row service-addon">
-          <div class="service-info">
-            <span class="service-num">+</span>
-            <h3 class="service-name">Rush Delivery <span class="rate-note">under 7 days</span></h3>
-          </div>
-          <span class="service-rate">+$100</span>
+        <div class="capability-card">
+          <h3 class="capability-name">Motion / Reels</h3>
+          <p class="capability-desc">Short-form video, BTS, and cinematic reels. Add to any session or commission as a standalone project.</p>
         </div>
       </div>
       <p class="services-note">50% deposit secures the date. Studio rental passed through at cost.</p>
       <div class="services-cta">
-        <a href="#contact" class="btn btn-outline">Inquire</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
       </div>
     </div>
   </section>
@@ -224,10 +177,14 @@
     <div class="container">
       <p class="section-eyebrow">Store</p>
       <h2 class="section-title">Digital Products</h2>
-      <p class="store-sub">The Vuhlande-inspired preset pack. Coming soon.</p>
-      <div class="product-grid" id="product-grid">
-        <!-- Injected by JS from data.js -->
-      </div>
+      <p class="store-sub">The Sixtrsh preset pack. Built on five years of color work — shadow tones, lifted blacks, warm midtones. Coming soon.</p>
+      <form class="waitlist-form" id="waitlist-form" novalidate>
+        <div class="waitlist-fields">
+          <input type="email" name="email" placeholder="Your email address" required autocomplete="email" class="waitlist-input" />
+          <button type="submit" class="btn btn-primary">Notify me</button>
+        </div>
+        <p class="waitlist-confirm" id="waitlist-confirm" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 
@@ -239,10 +196,16 @@
       <div class="contact-left">
         <p class="section-eyebrow">Contact</p>
         <h2 class="section-title">Got a vision.</h2>
-        <a href="https://instagram.com/sixtrsh" target="_blank" rel="noopener" class="ig-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          @sixtrsh
-        </a>
+        <div class="contact-links">
+          <a href="mailto:cam@sixtrsh.com" class="ig-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            cam@sixtrsh.com
+          </a>
+          <a href="https://instagram.com/sixtrsh" target="_blank" rel="noopener" class="ig-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            @sixtrsh
+          </a>
+        </div>
       </div>
       <form class="contact-form" id="contact-form">
         <div class="form-group">

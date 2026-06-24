@@ -321,6 +321,25 @@ function observeReveal(selector) {
 }
 
 /* ── Contact form ───────────────────────────────────────────── */
+/* ── Waitlist form ───────────────────────────────────────────── */
+const waitlistForm = document.getElementById("waitlist-form");
+if (waitlistForm) {
+  waitlistForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input   = waitlistForm.querySelector(".waitlist-input");
+    const confirm = document.getElementById("waitlist-confirm");
+    // Store locally — swap for Formspree / Mailchimp / ConvertKit endpoint in production
+    const emails = JSON.parse(localStorage.getItem("sixtrsh-waitlist") || "[]");
+    if (!emails.includes(input.value)) emails.push(input.value);
+    localStorage.setItem("sixtrsh-waitlist", JSON.stringify(emails));
+    confirm.textContent = "You're on the list. We'll be in touch.";
+    input.value = "";
+    input.disabled = true;
+    waitlistForm.querySelector("button").disabled = true;
+  });
+}
+
+/* ── Contact form ───────────────────────────────────────────── */
 document.getElementById("contact-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const btn = document.getElementById("submit-btn");

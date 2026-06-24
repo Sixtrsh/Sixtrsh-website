@@ -70,11 +70,19 @@ const PRODUCTS = [
     desc: "My full cinematic Lightroom preset collection.",
   },
   {
-    title: "Beginner Editing Guide",
-    price: "$27",
-    tag: "Guide",
+    title: "Photography Ebook",
+    price: "TBD",
+    tag: "Ebook",
     img: "images/product-placeholder-2.jpg",
     buyUrl: "#",
-    desc: "Learn the editing workflow behind every shot.",
+    desc: "The full photography guide — light, composition, and the edit.",
+  },
+  {
+    title: "Videography Ebook",
+    price: "TBD",
+    tag: "Ebook",
+    img: "images/product-placeholder-3.jpg",
+    buyUrl: "#",
+    desc: "The full videography guide — movement, color, and cinematic storytelling.",
   },
 ];

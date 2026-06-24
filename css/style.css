@@ -49,8 +49,8 @@
   --max-w:       1200px;
   --ease:        cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-out:    cubic-bezier(0.0, 0.0, 0.2, 1);
-  --serif:       'Cormorant Garamond', Georgia, serif;
 }
+
 
 /* Smooth theme transition on everything except images */
 *, *::before, *::after {
@@ -155,22 +155,20 @@ input, textarea { cursor: none; }
 }
 .section-eyebrow::before {
   content: '†';
-  font-family: var(--serif);
-  font-style: normal;
   font-size: 0.85rem;
   color: var(--text-dim);
   letter-spacing: 0;
 }
 
 .section-title {
-  font-family: var(--serif);
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 300;
-  font-style: italic;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
   line-height: 1.05;
   margin-bottom: 2.5rem;
 }
+
+h1, h2, h3 { letter-spacing: -0.03em; }
 
 /* ── Buttons ─────────────────────────────────────────────── */
 .btn {
@@ -342,11 +340,9 @@ input, textarea { cursor: none; }
 
 
 .hero-name {
-  font-family: var(--serif);
   font-size: clamp(4.5rem, 13vw, 12rem);
   font-weight: 300;
-  font-style: italic;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.04em;
   line-height: 0.88;
   margin-bottom: 2.5rem;
   animation: fadeUp 0.9s 0.1s var(--ease-out) both;
@@ -674,11 +670,9 @@ input, textarea { cursor: none; }
 }
 
 .service-name {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: 0;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 .service-rate {
@@ -694,6 +688,40 @@ input, textarea { cursor: none; }
   color: var(--text-muted);
 }
 
+/* Capabilities grid replaces services list */
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+
+.capability-card {
+  background: var(--bg);
+  padding: 2rem 1.75rem;
+  transition: background 0.2s var(--ease);
+}
+
+.capability-card:hover { background: var(--bg-2); }
+
+.capability-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.capability-desc {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
 .services-note {
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -703,14 +731,57 @@ input, textarea { cursor: none; }
 
 .services-cta { display: flex; }
 
+@media (max-width: 768px) {
+  .capabilities-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .capabilities-grid { grid-template-columns: 1fr; }
+}
+
 /* ── STORE ───────────────────────────────────────────────── */
 #store { background: var(--bg-2); }
 
 .store-sub {
   color: var(--text-muted);
   font-size: 0.9rem;
+  line-height: 1.7;
   margin-top: -1.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
+  max-width: 520px;
+}
+
+.waitlist-form { max-width: 480px; }
+
+.waitlist-fields {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.waitlist-input {
+  flex: 1;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 0.7rem 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.waitlist-input::placeholder { color: var(--text-dim); }
+.waitlist-input:focus { border-color: var(--border-mid); }
+
+.waitlist-confirm {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  min-height: 1.2em;
+}
+
+@media (max-width: 480px) {
+  .waitlist-fields { flex-direction: column; }
 }
 
 .product-grid {
@@ -795,6 +866,12 @@ input, textarea { cursor: none; }
 }
 
 .contact-left .section-title { margin-bottom: 1.5rem; }
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
 
 .ig-link {
   display: inline-flex;
@@ -1016,10 +1093,6 @@ input, textarea { cursor: none; }
 
 .section-ornament svg { flex-shrink: 0; opacity: 0.7; }
 
-/* ── Gothic: Contact heading in serif ───────────────────── */
-.contact-left .section-title {
-  font-style: italic;
-}
 
 /* ── Gothic: About bio slight tracking ──────────────────── */
 .about-bio {
@@ -1032,23 +1105,13 @@ input, textarea { cursor: none; }
   letter-spacing: 0.01em;
 }
 
-/* ── Gothic: Product title in serif ─────────────────────── */
-.product-title {
-  font-family: var(--serif);
-  font-size: 1.15rem;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: 0;
-  margin-bottom: 0.4rem;
-}
+/* .product-title defined above */
 
-/* ── Gothic: Footer logo in serif italic ────────────────── */
 .footer-logo {
-  font-family: var(--serif);
-  font-size: 1rem;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: 0.02em;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
