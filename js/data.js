@@ -12,9 +12,11 @@
    }
    ──────────────────────────────────────────────────────────── */
 const PHOTOS = [
-  { src: "images/DSC06942.jpg", alt: "Portrait", span: "tall" },
-  { src: "images/DSC06954.jpg", alt: "Portrait", span: "tall" },
-  { src: "images/DSC07046.jpg", alt: "Portrait", span: "tall" },
+  { src: "images/DSC06942.jpg",  alt: "Portrait", span: "tall" },
+  { src: "images/DSC06954.jpg",  alt: "Portrait", span: "tall" },
+  { src: "images/DSC07046.jpg",  alt: "Portrait", span: "tall" },
+  { src: "images/IMG_3748-2.jpg", alt: "Portrait", span: "tall" },
+  { src: "images/IMG_3764-2.jpg", alt: "Portrait", span: "tall" },
 ];
 
 /* ── VIDEOS ──────────────────────────────────────────────────

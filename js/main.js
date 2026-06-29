@@ -242,6 +242,7 @@ function buildVideoGrid() {
 /* ── Build Product Grid ─────────────────────────────────────── */
 function buildProductGrid() {
   const grid = document.getElementById("product-grid");
+  if (!grid) return; // section replaced by waitlist — skip silently
   PRODUCTS.forEach((product) => {
     const card = document.createElement("div");
     card.className = "product-card";
@@ -317,6 +318,8 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 
 function observeReveal(selector) {
+  // Mark body so CSS knows JS is running — enables the fade-in animation
+  document.body.classList.add("reveal-ready");
   document.querySelectorAll(selector).forEach((el) => revealObserver.observe(el));
 }
 
@@ -372,4 +375,4 @@ initImageFade();
 initPhotoCarousel();
 
 // Observe reveal elements after DOM is built
-observeReveal(".photo-gallery, .photo-item, .video-card, .product-card, .service-row, .about-container, .contact-left, .contact-form");
+observeReveal(".photo-item, .video-card, .capability-card, .about-container, .contact-left, .contact-form");
